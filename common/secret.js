@@ -2,20 +2,18 @@ module.exports ={
   'secret' : 'thisissupersecretkeybyfootingproject',
   'db_info': {
     local:{
-      host: 'localhost',
+      host: '115.178.77.138',
       port: '3306',
       user: 'root',
-      password: '',
-      database: 'holdemclub'
+      database: 'footing',
+      password: 'password'
     },
     real:{
-      host: 'localhost',
+      host: '115.178.77.138',
       port: '3306',
       user: 'root',
       database:'footing',
       password:'password'
-
     }
-
   }
 };

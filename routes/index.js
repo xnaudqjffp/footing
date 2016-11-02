@@ -27,6 +27,4 @@ router.get('/login', function (req, res, next){
   })
 });
 /*login view page*/
-
-
 module.exports = router;
