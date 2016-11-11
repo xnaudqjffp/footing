@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var config = require('../common/secret').db_info.local; /*DB instance 선택*/
+var config = require('../common/secret').db_info.real; /*DB instance 선택*/
 
 module.exports = function(){
   return{
