@@ -27,4 +27,25 @@ router.get('/login', function (req, res, next){
   })
 });
 /*login view page*/
+
+
+/*test*/
+router.get('/formtest', function (req, res, next){
+  res.render('formtest',{
+    title: 'formtest',
+    part: 'formtest'
+  })
+});
+/*test*/
+router.get('/formtest/:id', function(req, res, next){
+  var id = req.params.id;
+  console.log(id);
+
+  res.json({
+    'success': id
+  })
+
+});
+
+
 module.exports = router;

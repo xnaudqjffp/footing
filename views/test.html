@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>item 0</h1>
+<h1>item 1</h1>
+<h1>item 2</h1>
+<h1>item 3</h1>
+<h1>item 4</h1>
+
+</body>
+</html>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    (function(){
+        /*item = h1 선택자를 의*/
+        $('h1').each(function (index, item){
+            console.log(index, item);
+            $('h1').addClass(function (index){
+                return 'test_'+index;
+            });
+        })
+
+
+
+    }())
+
+</script>
