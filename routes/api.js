@@ -8,6 +8,7 @@
 var express = require('express');
 var router = express.Router();
 var login = require('../service/service_login');
+var signup = require('../service/service_signup');
 
 //var bcrypt = require('bcrypt');
 
@@ -21,6 +22,18 @@ router.post('/login', function(req, res, next){
   console.log(password);
 
   login.login(req, res, user_id, password);
+});
+
+// post 형식으로 signup확인
+router.post('/signup', function(req, res, next){
+  var
+      user_id = req.body.user_id,
+      password = req.body.password;
+
+  console.log(user_id);
+  console.log(password);
+
+  signup.signup(req, res, user_id, password);
 });
 
 
