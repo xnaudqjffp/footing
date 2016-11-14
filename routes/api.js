@@ -34,6 +34,7 @@ router.post('/signup', function(req, res, next){
   console.log(password);
 
   signup.signup(req, res, user_id, password);
+
 });
 
 
