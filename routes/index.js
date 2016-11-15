@@ -72,7 +72,7 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/', fail
  *  로그아웃*/
 router.get('/logout', function (req, res) {
   req.logout();
-  req.redirect('/')
+  res.redirect('/')
   /*로그아웃시에 어디로 리다이렉트 시킬것인가?*/
 });
 
@@ -80,7 +80,8 @@ router.get('/logout', function (req, res) {
 router.get('/', function (req, res, next) {
   res.render('index', {          //index.hbs ����
     title: 'footing',
-    footing: 'Firs'
+    footing: 'Firs',
+    nickname: (req.user === undefined)? 0: req.user.nickname
   });
 });
 

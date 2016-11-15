@@ -10,7 +10,14 @@
             <li class="list-group-item">Map</li>
             <li class="list-group-item">Timeline</li>
             <li class="list-group-item">My Account</li>
-            <li class="list-group-item"><a href="/login">Settings</a></li>
+          {{#if nickname}}
+              <li class="list-group-item">{{nickname}}</li>
+              <li class="list-group-item"><a href="/logout">Logout</a></li>
+          {{/if}}
+
+          {{#unless nickname}}
+              <li class="list-group-item"><a href="/login">Settings</a></li>
+          {{/unless}}
         </ul>
     </div>
     <div class="portfolio"></div>
