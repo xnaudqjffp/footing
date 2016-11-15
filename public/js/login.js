@@ -2,7 +2,8 @@ var
   btn_signup = $('.btn_signup'),
   btn_login = $('.btn_login'),
   user_id = $('.user_id'),
-  password =$('.password');
+  password =$('.password'),
+  form_login = $('.form_login');
 
 /*TODO password validation 로직 common.js 검사할것*/
 btn_signup.on('click', function(){
@@ -35,6 +36,8 @@ btn_signup.on('click', function(){
 
 btn_login.bind('click', function(){
 
+
+
   /*login api ajax 통신 시작*/
   var request = null,
     _user_id = user_id,
@@ -55,8 +58,11 @@ btn_login.bind('click', function(){
         password.val('');
         alert(res.msg);
       }else{
-        alert(res.msg);
-        location.href = '/';/*어디로 리다이렉트 시킬것인가??*/
+        //alert(res.msg);
+        console.log('success');
+        form_login.submit();
+
+        //location.href = '/';/*어디로 리다이렉트 시킬것인가??*/
       }
     }
   });

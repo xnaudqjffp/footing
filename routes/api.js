@@ -7,28 +7,65 @@
 
 var express = require('express');
 var router = express.Router();
+var mysql_dbc = require('../common/db_con')();
+var connection = mysql_dbc.init();
+
 var login = require('../service/service_login');
 var signup = require('../service/service_signup');
 
 //var bcrypt = require('bcrypt');
-
-
 router.post('/login', function(req, res, next){
   var
     user_id = req.body.user_id,
     password = req.body.password;
 
+  if(user_id === undefined || user_id== null ||password === undefined || password== null){
+    console.log('no date')
+  }
   console.log(user_id);
   console.log(password);
 
-  login.login(req, res, user_id, password);
+  var stmt_login = 'select *from footing.`user`  where `user_id` = ?;';
+
+  connection.query(stmt_login, user_id, function (err, result) {
+    if (err) {
+      res.json({
+        'success': false,
+        'msg': 'DB INTERNAL_ERROR'
+      });
+    } else {
+      if (result.length === 0) {
+        res.json({
+          'success': false,
+          'msg': '등록된 계정이 없습니다.'
+        })
+      } else {
+        if (result[0].password !== password) {
+          res.json({
+            'success': false,
+            'msg': '패스워드가 일치하지 않습니다.'
+          });
+        } else {
+
+          res.json({
+            'success': true,
+            'msg': '로그인에 성공했습니다.'
+          });
+        }
+      }
+    }
+  })
+
+  //login.login(req, res, user_id, password);
 });
 
 // post 형식으로 signup확인
 router.post('/signup', function(req, res, next){
   var
-      user_id = req.body.user_id,
+      user_id = req.body.username,
       password = req.body.password;
+
+
 
   console.log(user_id);
   console.log(password);
@@ -39,6 +76,7 @@ router.post('/signup', function(req, res, next){
 
 
 router.get('/testget', function (req, res, next){
+  console.log(req.user);
   console.log('get router ... start');
 
   console.log(req.query);

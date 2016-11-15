@@ -4,13 +4,25 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cookieSession = require('cookie-session');
+var session = require('express-session');
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var mpdata = require('./routes/map');
 var api = require('./routes/api');
 
+/*passport 이용한 login*/
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash'); // session 관련해서 사용됨. 로그인 실패시 session등 클리어하는 기능으로 보임.
+/*passport 이용한 login*/
+
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +36,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use(cookieSession({
+  keys: ['footing'] // TODO 나중에 수정할 것 세션 저장 기간은? 기타등등.
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 app.use('/', routes);
