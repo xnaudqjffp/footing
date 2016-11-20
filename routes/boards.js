@@ -19,16 +19,28 @@ router.get('/', function(req, res, next){
     if(err){
       console.log(err)
     }else{
-      console.log(result)
+      console.log(board_list)
       res.render('boards',{
         title: 'board ...',
         board_list: board_list
       })
     }
   })
-
-
-
 })
 
+router.get('/view/:id', function(req, res, next){
+  var id = req.params.id ;
+  var stmt_board_id = 'select * from footing.`board` where id =?;';
+  connection.query(stmt_board_id,id, function(err,board_id){
+    if(err){
+     console.log(err)
+    }else{
+      console.log(board_id)
+      res.render('view',{
+        title : 'view page',
+        board_id : board_id
+      })
+    }
+  })
+});
 module.exports = router;

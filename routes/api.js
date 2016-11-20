@@ -118,6 +118,21 @@ router.post('/testpost', function(req, res, next){
 });
 
 
+router.post('/remove/board', function(req, res, next){
+   var id = req.query.id;
+
+  var stmt_rempove_board = 'delete from footing.`board` where `id` = ?';
+
+  connection.query(stmt_rempove_board,id, function(err, result){
+    if(err){
+      console.log('err! :' +err)
+    }else{
+      res.redirect('/boards');
+    }
+  });
+});
+
+
 
 
 module.exports = router;

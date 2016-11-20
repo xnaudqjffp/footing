@@ -1,0 +1,43 @@
+{{#if board_id}}
+    {{#each board_id}}
+        <div class="container content_wrapper">
+    <h3 class="page-header clearfix">
+        {{title}}
+    </h3>
+
+    <form id="form-modify" action="<?= ROOT ?>notice/modify.php" method="post">
+        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="page" id="page" value="<?= $page ?>">
+    </form>
+
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary btn-golist">Go List</button>
+
+        <button type="submit" class="btn btn-default btn-modify">Modify</button>
+    </div>
+
+    <!--title-->
+
+    <div class="view-contents-wrapper">
+        <div class="view-title">
+            <strong class="tit"></strong>
+            <span class="view-date">{{created_dt}}</span>
+        </div>
+
+
+        <!—content—>
+
+
+        <div class="contents"> {{content}} </div>
+
+        <div class="reply-area">
+            <span class="txt-comment">Comment</span>
+            <button type="button" class="btn btn-success btn-comment btn-reply " data-toggle="modal" data-target="#WriteCommentModal">
+                Comment
+            </button>
+        </div>
+
+
+    </div>
+    {{/each}}
+{{/if}}

@@ -33,7 +33,8 @@ TODO 3. 작성된 쿼리 view에서 표시
                       {{#each board_list}}
                           <tr>
                               <td>{{id}}</td>
-                              <td>{{title}}</td>
+                              <td><a href="/boards/view/{{id}}">{{title}}</a></td>
+                              <td><a href="/api/v1/remove/board?id={{id}}" class="btn btn-danger btn-sm">Delete</a></td>
                               <td>{{created_dt}}</td>
                           </tr>
                       {{/each}}
