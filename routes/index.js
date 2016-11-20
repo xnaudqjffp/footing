@@ -31,7 +31,7 @@ passport.deserializeUser(function (user, done) {
 var isAuthenticated = function (req, res, next) {
   if (req.isAuthenticated())
     return next();
-  res.redirect('/');
+  res.redirect('/login');
 };
 
 passport.use(new LocalStrategy({
@@ -72,16 +72,16 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/', fail
  *  로그아웃*/
 router.get('/logout', function (req, res) {
   req.logout();
-  res.redirect('/')
+  res.redirect('/');
   /*로그아웃시에 어디로 리다이렉트 시킬것인가?*/
 });
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/' , function (req, res, next) {
   res.render('index', {          //index.hbs ����
     title: 'footing',
     footing: 'Firs',
-    nickname: (req.user === undefined)? 0: req.user.nickname
+    nickname: (req.user === undefined)? false: req.user.nickname
   });
 });
 

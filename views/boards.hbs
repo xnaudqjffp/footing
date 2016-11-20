@@ -1,0 +1,51 @@
+<!--u
+TODO 1. a href tag로 view 이동
+TODO 2. router view 에서 해당 id 쿼리 작성
+TODO 3. 작성된 쿼리 view에서 표시
+
+-->
+
+<div>게시판입니다.</div>
+        <h3 class="page-header clearfix">Banner</h3>
+        <button class="btn btn-primary btn-md btn-right btn-add">Add</button>
+
+        <div class="box">
+            <div class="box-body">
+                <table class="table table-hover">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="10%">
+                    </colgroup>
+
+                    <thead class="thead-default">
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {{#if board_list}}
+                      {{#each board_list}}
+                          <tr>
+                              <td>{{id}}</td>
+                              <td>{{title}}</td>
+                              <td>{{created_dt}}</td>
+                          </tr>
+                      {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="4" class="text-center"> There is no data</td>
+                        </tr>
+                    {{/if}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
