@@ -13,13 +13,11 @@ router.get('/', function(req, res, next){
 
   var stmt_board_list = 'select *from footing.`board`;';
 
-  var test = null;
 
   connection.query(stmt_board_list, function (err, board_list){
     if(err){
       console.log(err)
     }else{
-      console.log(result)
       res.render('boards',{
         title: 'board ...',
         board_list: board_list
