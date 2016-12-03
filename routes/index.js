@@ -14,17 +14,14 @@ var flash = require('connect-flash');
  * passport를 통한 로그인 로직
  * */
 
+
 /*로그인 성공시 사용자 정보를 Session에 저장한다*/
 passport.serializeUser(function (user, done) {
-  console.log('serialize');
-  console.log(user);
   done(null, user);
 });
 
 /*인증 후, 페이지 접근시 마다 사용자 정보를 Session에서 읽어옴.*/
 passport.deserializeUser(function (user, done) {
-  console.log('deserialize');
-  console.log(user);
   done(null, user);
 });
 
@@ -61,9 +58,23 @@ passport.use(new LocalStrategy({
   }
 ));
 
+/*login view page*/
+router.get('/login', function (req, res, next) {
+  console.log(req.user);
+  if (req.user === undefined) {
+    res.render('login', {
+      title: 'Footing Login',
+      part: 'login'
+    })
+  } else {
+    res.redirect('/');
+  }
+});
+/*login view page*/
+
 /**
  * 로그인*/
-router.post('/login', passport.authenticate('local', {failureRedirect: '/', failureFlash: true}), // 인증실패시 401 리턴, {} -> 인증 스트레티지
+router.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash: true}), // 인증실패시 401 리턴, {} -> 인증 스트레티지
   function (req, res) {
     res.redirect('/');
   });
@@ -77,11 +88,11 @@ router.get('/logout', function (req, res) {
 });
 
 /* GET home page. */
-router.get('/' , function (req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', {          //index.hbs ����
     title: 'footing',
     footing: 'Firs',
-    nickname: (req.user === undefined)? false: req.user.nickname
+    nickname: (req.user === undefined) ? false : req.user.nickname
   });
 });
 
@@ -90,24 +101,6 @@ router.get('/test', function (req, res, next) {
     data: 'footing'
   });
 });
-
-
-/*login view page*/
-router.get('/login', function (req, res, next) {
-  console.log(req.user);
-
-  if(req.user === undefined){
-    res.render('login', {
-      title: 'Footing Login',
-      part: 'login'
-    })
-  }else{
-    res.redirect('/');
-  }
-
-});
-/*login view page*/
-
 
 /*test*/
 router.get('/formtest', function (req, res, next) {
@@ -124,8 +117,11 @@ router.get('/formtest/:id', function (req, res, next) {
   res.json({
     'success': id
   })
-
 });
 
+router.get('/legend', isAuthenticated, function (req, res, next) {
+  console.log('get legend ...');
+  res.end('legend page.. Hello world');
+});
 
 module.exports = router;

@@ -13,6 +13,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var mpdata = require('./routes/map');
 var boards = require('./routes/boards');
+var signup = require('./routes/signup');
 var api = require('./routes/api');
 
 /*passport 이용한 login*/
@@ -51,6 +52,8 @@ app.use('/users', users);
 app.use('/map',mpdata);
 app.use('/api/v1', api);
 app.use('/boards', boards);
+app.use('/signup', signup);
+
 /*router*/
 
 // catch 404 and forward to error handler

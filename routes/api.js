@@ -14,12 +14,12 @@ var login = require('../service/service_login');
 var signup = require('../service/service_signup');
 
 //var bcrypt = require('bcrypt');
-router.post('/login', function(req, res, next){
+router.post('/login', function (req, res, next) {
   var
     user_id = req.body.user_id,
     password = req.body.password;
 
-  if(user_id === undefined || user_id== null ||password === undefined || password== null){
+  if (user_id === undefined || user_id == null || password === undefined || password == null) {
     console.log('no date')
   }
   console.log(user_id);
@@ -54,17 +54,16 @@ router.post('/login', function(req, res, next){
         }
       }
     }
-  })
+  });
 
   //login.login(req, res, user_id, password);
 });
 
 // post 형식으로 signup확인
-router.post('/signup', function(req, res, next){
+router.post('/signup', function (req, res, next) {
   var
-      user_id = req.body.username,
-      password = req.body.password;
-
+    user_id = req.body.username,
+    password = req.body.password;
 
 
   console.log(user_id);
@@ -75,7 +74,7 @@ router.post('/signup', function(req, res, next){
 });
 
 
-router.get('/testget', function (req, res, next){
+router.get('/testget', function (req, res, next) {
   console.log(req.user);
   console.log('get router ... start');
 
@@ -89,15 +88,15 @@ router.get('/testget', function (req, res, next){
 
   res.json({
     'success': true,
-    'status' : 200
+    'status': 200
   })
 
 });
 
 
-router.post('/testpost', function(req, res, next){
+router.post('/testpost', function (req, res, next) {
 
-  if(req.body.value01 === null || req.body.value01 === undefined){
+  if (req.body.value01 === null || req.body.value01 === undefined) {
     console.log('no data')
     return;
   }
@@ -118,21 +117,36 @@ router.post('/testpost', function(req, res, next){
 });
 
 
-router.post('/remove/board', function(req, res, next){
-   var id = req.query.id;
+router.get('/remove/board', function (req, res, next) {
+  var id = req.query.id;
 
-  var stmt_rempove_board = 'delete from footing.`board` where `id` = ?';
+  var stmt_rempove_board = 'delete from footing.`board` where `id` = "' + id + '"';
 
-  connection.query(stmt_rempove_board,id, function(err, result){
-    if(err){
-      console.log('err! :' +err)
-    }else{
+  connection.query(stmt_rempove_board, function (err, result) {
+    if (err) {
+      console.log('err! :' + err)
+    } else {
       res.redirect('/boards');
     }
   });
 });
 
 
+/*signup result*/
+router.post('/signup/result', function (req, res, next) {
+  console.log('asd');
+
+  var _signupInfo = {
+    user_id: req.body.user_id,
+    nickname: req.body.nickname,
+    password: req.body.password
+  }
+
+  console.log(_signupInfo)
+
+});
+
+/*signup result*/
 
 
 module.exports = router;

@@ -1,3 +1,15 @@
+<form action="/api/v1/signup/result" method="post" id="form-signup-result">
+
+    아이디<input type="text" name="user_id" id="user_id" required /> <br/>
+    닉네임<input type="text" name="nickname" id="nickname" required/> <br/>
+    비밀반호<input type="password" name="password" id="password" required/> <br/>
+    비밀번호 확인<input type="password" name="re_password" id="re-password" required/> <br/>
+    생년월일 <input type="datetime" name="birthday" id="birthday" required/> <br/>
+
+    <button type="reset" >취소</button>
+    <button type="submit">확인</button>
+</form>
+
 <script>
     /**
      * 1. 아이디 중복 검사를 진행한다. ajax
